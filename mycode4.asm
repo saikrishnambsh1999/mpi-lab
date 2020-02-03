@@ -1,0 +1,30 @@
+.MODEL SMALL
+ASSUME CS:CODE,DS:DATA
+DATA SEGMENT
+    NUM DB 07H 
+DATA ENDS 
+CODE SEGMENT
+    MOV AX,DATA
+    MOV DS,AX
+    XOR AX,AX
+    XOR BL,BL 
+    MOV CX,8
+    MOV AL,NUM
+    BACK:
+    SHR AL,1
+    JC NEXT
+    JNC EXIT
+    NEXT:
+    INC BL
+    LOOP BACK
+    
+    EXIT:  
+    LOOP BACK
+    
+    XOR DX,DX
+    MOV DL,BL
+    ADD DL,48
+    MOV AH,02H
+    INT 21H
+    
+CODE ENDS 
